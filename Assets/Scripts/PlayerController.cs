@@ -51,8 +51,13 @@ public class PlayerController : MonoBehaviour {
 		// Movement
 		transform.Translate (input.GetMovement().normalized * Time.fixedDeltaTime * speed);
 
+		// Energy
+		if(energy + 5* Time.fixedDeltaTime <= startingEnergy) {
+			energy += 5 * Time.fixedDeltaTime;
+			gm.SetEneryBarPercentage(energy / startingEnergy);
+		}
 		// Interact
-		if(input.GetInteract()) {
+		if (input.GetInteract()) {
 			//Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			int layer = 1 << 9;
